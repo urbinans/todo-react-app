@@ -7,6 +7,11 @@
 .Task-actions {
     display: flex;
     flex-direction: column;
+    font-size: 75%;
+}
+
+.Task-actions i {
+    margin: 3px;
 }
 
 .Task-desc {

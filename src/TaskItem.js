@@ -5,10 +5,10 @@ class TaskItem extends Component {
   render() {
     return (
       <div className="Task">
-        <input type="checkbox" checked={this.props.checked} />
+        <input type="checkbox" defaultChecked={this.props.checked} />
         <div className="Task-actions">
-          <input type="button" value="E" />
-          <input type="button" value="D" />
+          <i className="fas fa-pencil-alt"></i>
+          <i className="fas fa-trash-alt"></i>
         </div>
         <span className="Task-desc">{this.props.description}</span>
       </div>
