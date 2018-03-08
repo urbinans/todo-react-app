@@ -12,7 +12,7 @@ class TaskLister extends Component {
 
     return (
       <form className="Lister">
-        {this.props.title}<br />
+        <span className="Lister-title">{this.props.title}</span><br />
         {items}
       </form>
     );
