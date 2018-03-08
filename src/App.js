@@ -83,11 +83,11 @@ class App extends Component {
       return task.done === false;
     });
 
-    let addButton = null;
+    let addSection = null;
     if (this.state.addNewTask) {
-      addButton = <TaskAdder newTask={this.state.newTask} handleSave={this.handleSave} handleCancel={this.handleCancel}/>
+      addSection = <TaskAdder newTask={this.state.newTask} handleSave={this.handleSave} handleCancel={this.handleCancel}/>
     } else {
-      addButton = <button className="App-new-task-button" onClick={this.handleNewTask}>New Task</button>
+      addSection = <button className="App-new-task-button" onClick={this.handleNewTask}>New Task</button>
     }
 
     return (
@@ -99,7 +99,7 @@ class App extends Component {
           <TaskLister title="Undone" tasks={undoneTasks} />
           <TaskLister title="Done" tasks={doneTasks} />
         </div>
-        {addButton}
+        {addSection}
       </div>
     );
   }
