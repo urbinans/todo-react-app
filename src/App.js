@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import TaskLister from './TaskLister';
+import TaskAdder from './TaskAdder';
 
 class App extends Component {
-  render() {
+  constructor(props) {
+    super(props);
     const tasks = [
       {
         "id": 1,
@@ -32,13 +34,61 @@ class App extends Component {
       }
     ];
 
-    const doneTasks = tasks.filter(task => {
+    this.state = {
+      addNewTask: false,
+      tasks: tasks
+    };
+    this.handleNewTask = this.handleNewTask.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  handleNewTask() {
+    this.setState({
+      addNewTask: true
+    });
+  }
+
+  handleSave(value) {
+    if (value !== "") {
+      let tasks = this.state.tasks;
+      tasks.push({
+        "id": tasks.length,
+        "description": value,
+        "done": false
+      });
+      this.setState({
+        addNewTask: false,
+        task: tasks
+      });
+    } else {
+      this.setState({
+        addNewTask: false,
+      });
+    }
+  }
+
+  handleCancel() {
+    this.setState({
+      addNewTask: false
+    });
+  }
+
+  render() {
+    const doneTasks = this.state.tasks.filter(task => {
       return task.done === true;
     });
 
-    const undoneTasks = tasks.filter(task => {
+    const undoneTasks = this.state.tasks.filter(task => {
       return task.done === false;
     });
+
+    let addButton = null;
+    if (this.state.addNewTask) {
+      addButton = <TaskAdder newTask={this.state.newTask} handleSave={this.handleSave} handleCancel={this.handleCancel}/>
+    } else {
+      addButton = <button className="App-new-task-button" onClick={this.handleNewTask}>New Task</button>
+    }
 
     return (
       <div className="App">
@@ -49,7 +99,7 @@ class App extends Component {
           <TaskLister title="Undone" tasks={undoneTasks} />
           <TaskLister title="Done" tasks={doneTasks} />
         </div>
-        <button className="App-new-task-button">New Task</button>
+        {addButton}
       </div>
     );
   }

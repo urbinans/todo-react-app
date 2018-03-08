@@ -1,0 +1,24 @@
+.Task-adder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Adder-buttons {
+    display: flex;
+}
+
+.Save-button {
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: #0069d9; 
+}
+
+.Cancel-button {
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: gray; 
+}
