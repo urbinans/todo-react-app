@@ -49,7 +49,7 @@ class App extends Component {
           <TaskLister title="Undone" tasks={undoneTasks} />
           <TaskLister title="Done" tasks={doneTasks} />
         </div>
-        <button>New Task</button>
+        <button className="App-new-task-button">New Task</button>
       </div>
     );
   }

@@ -7,6 +7,17 @@
 .Task-actions {
     display: flex;
     flex-direction: column;
+    font-size: 75%;
+}
+
+.Task-delete {
+    margin: 3px;
+    color: #c82333;
+}
+
+.Task-edit {
+    margin: 3px;
+    color: #e0a800;
 }
 
 .Task-desc {
