@@ -12,6 +12,11 @@
   font-size: 1.5em;
 }
 
+.App-listers {
+  display: flex;
+  justify-content: center;
+}
+
 .App-intro {
   font-size: large;
 }

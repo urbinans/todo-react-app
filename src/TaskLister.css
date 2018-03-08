@@ -1,0 +1,11 @@
+.Lister {
+    border: 5px solid black;
+    border-radius: 10px;
+    margin: 10px;
+    width: 300px;
+}
+
+.Lister div {
+    text-align: left;
+}
+

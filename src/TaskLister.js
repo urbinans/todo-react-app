@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './TaskLister.css';
 import TaskItem from './TaskItem';
 
 class TaskLister extends Component {
@@ -10,7 +11,7 @@ class TaskLister extends Component {
     });
 
     return (
-      <form>
+      <form className="Lister">
         {this.props.title}<br />
         {items}
       </form>

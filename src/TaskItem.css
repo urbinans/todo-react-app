@@ -1,0 +1,14 @@
+.Task {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.Task-actions {
+    display: flex;
+    flex-direction: column;
+}
+
+.Task-desc {
+    margin-left : 5px;
+}

@@ -45,8 +45,10 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">My Todo List</h1>
         </header>
-        <TaskLister title="Undone" tasks={undoneTasks} />
-        <TaskLister title="Done" tasks={doneTasks} />
+        <div className="App-listers">
+          <TaskLister title="Undone" tasks={undoneTasks} />
+          <TaskLister title="Done" tasks={doneTasks} />
+        </div>
         <button>New Task</button>
       </div>
     );
