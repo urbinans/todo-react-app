@@ -101,15 +101,19 @@ class App extends Component {
   }
 
   handleSaveEdit(taskId,newDesc) {
-    const tasks = this.state.tasks.map(task => {
-      if (task.id === taskId) {
-        task.description = newDesc;
-      }
-      return task;
-    });
-    this.setState({
-      tasks: tasks
-    });
+    if (newDesc === "") {
+      this.handleDel(taskId);
+    } else {
+      const tasks = this.state.tasks.map(task => {
+        if (task.id === taskId) {
+          task.description = newDesc;
+        }
+        return task;
+      });
+      this.setState({
+        tasks: tasks
+      });
+    }
   }
 
   render() {
