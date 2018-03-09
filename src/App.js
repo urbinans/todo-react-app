@@ -36,11 +36,13 @@ class App extends Component {
 
     this.state = {
       addNewTask: false,
-      tasks: tasks
+      tasks: tasks,
+      idCount: 5
     };
     this.handleNewTask = this.handleNewTask.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleDel = this.handleDel.bind(this);
   }
 
   handleNewTask() {
@@ -53,13 +55,14 @@ class App extends Component {
     if (value !== "") {
       let tasks = this.state.tasks;
       tasks.push({
-        "id": tasks.length,
+        "id": this.state.idCount + 1,
         "description": value,
         "done": false
       });
       this.setState({
         addNewTask: false,
-        task: tasks
+        task: tasks,
+        idCount: this.state.idCount + 1
       });
     } else {
       this.setState({
@@ -71,6 +74,15 @@ class App extends Component {
   handleCancel() {
     this.setState({
       addNewTask: false
+    });
+  }
+
+  handleDel(taskId) {
+    const tasks = this.state.tasks.filter(task => {
+      return task.id !== taskId;
+    });
+    this.setState({
+      tasks: tasks
     });
   }
 
@@ -96,8 +108,8 @@ class App extends Component {
           <h1 className="App-title">My Todo List</h1>
         </header>
         <div className="App-listers">
-          <TaskLister title="Undone" tasks={undoneTasks} />
-          <TaskLister title="Done" tasks={doneTasks} />
+          <TaskLister title="Undone" tasks={undoneTasks} handleDel={this.handleDel}/>
+          <TaskLister title="Done" tasks={doneTasks} handleDel={this.handleDel}/>
         </div>
         {addSection}
       </div>
