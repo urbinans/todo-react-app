@@ -1,7 +1,7 @@
 # todo-react-app
 An implementation of a Todo app using React.js. Hope you like it ;-)
 
-## What it will do?
+## ~~What it will do?~~ What it does?
 
 - [x] List items
 - [x] Add item
