@@ -44,6 +44,7 @@ class App extends Component {
     this.handleCancel = this.handleCancel.bind(this);
     this.handleDel = this.handleDel.bind(this);
     this.handleTaskStatusChange = this.handleTaskStatusChange.bind(this);
+    this.handleSaveEdit = this.handleSaveEdit.bind(this);
   }
 
   handleNewTask() {
@@ -99,6 +100,18 @@ class App extends Component {
     });
   }
 
+  handleSaveEdit(taskId,newDesc) {
+    const tasks = this.state.tasks.map(task => {
+      if (task.id === taskId) {
+        task.description = newDesc;
+      }
+      return task;
+    });
+    this.setState({
+      tasks: tasks
+    });
+  }
+
   render() {
     const doneTasks = this.state.tasks.filter(task => {
       return task.done === true;
@@ -126,12 +139,14 @@ class App extends Component {
             tasks={undoneTasks}
             handleDel={this.handleDel}
             handleTaskStatusChange={this.handleTaskStatusChange}
+            handleSaveEdit={this.handleSaveEdit}
           />
           <TaskLister
             title="Done"
             tasks={doneTasks}
             handleDel={this.handleDel}
             handleTaskStatusChange={this.handleTaskStatusChange}
+            handleSaveEdit={this.handleSaveEdit}
           />
         </div>
         {addSection}

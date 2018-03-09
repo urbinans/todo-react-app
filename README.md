@@ -5,7 +5,7 @@ An implementation of a Todo app using React.js. Hope you like it ;-)
 
 - [x] List items
 - [x] Add item
-- [ ] Edit item
+- [x] Edit item
 - [x] Remove item
 - [x] Mark as done
 - [x] Mark as undone
