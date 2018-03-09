@@ -28,3 +28,10 @@
   color: white;
   background-color: #0069d9; 
 }
+
+.App-reset-button {
+  padding: 10px;
+  font-weight: bold;
+  color: white;
+  background-color: gray;
+}

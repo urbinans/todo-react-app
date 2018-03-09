@@ -6,6 +6,8 @@
 }
 
 .Lister-title {
+    color: rgb(53, 6, 128);
+    font-style: oblique;
     font-weight: bold;
     font-size: 1.25em;
 }

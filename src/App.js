@@ -1,3 +1,7 @@
+/*  Name: Todo React App
+*   Author: Nelson Urbina
+*/
+
 import React, { Component } from 'react';
 import './App.css';
 import TaskLister from './TaskLister';
@@ -6,6 +10,9 @@ import TaskAdder from './TaskAdder';
 class App extends Component {
   constructor(props) {
     super(props);
+    /*  The "task" variable will have some dummy data to show on first run. This can be cleared using
+    *   the reset button on the app
+    */
     const tasks = [
       {
         "id": 1,
@@ -45,14 +52,19 @@ class App extends Component {
     this.handleDel = this.handleDel.bind(this);
     this.handleTaskStatusChange = this.handleTaskStatusChange.bind(this);
     this.handleSaveEdit = this.handleSaveEdit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
+  //  handleNewTask() will change the state of the app to render the section to add a new task
   handleNewTask() {
     this.setState({
       addNewTask: true
     });
   }
 
+  /*  handleSave() will add a new task to the list. If the user leave the text box empty, it wil
+  *   return to the initial state of the app without changing the list
+  */
   handleSave(value) {
     if (value !== "") {
       let tasks = this.state.tasks;
@@ -73,12 +85,16 @@ class App extends Component {
     }
   }
 
+  //  handleCancel() will return the app to the initial state ignoring the user input
   handleCancel() {
-    this.setState({
-      addNewTask: false
-    });
+    if (window.confirm("Are you sure you want to cancel?\nAll your input will be lost")) {
+      this.setState({
+        addNewTask: false
+      });
+    }
   }
 
+  //  handleDel() deletes a task from the lists
   handleDel(taskId) {
     const tasks = this.state.tasks.filter(task => {
       return task.id !== taskId;
@@ -88,6 +104,7 @@ class App extends Component {
     });
   }
 
+  //  handleTaskStatusChange() move a task between the done and undone sections
   handleTaskStatusChange(taskId) {
     const tasks = this.state.tasks.map(task => {
       if (task.id === taskId) {
@@ -100,6 +117,9 @@ class App extends Component {
     });
   }
 
+  /* handleSaveEdit() will store the changes on a task description, but if the user clears the textbox
+  *  then it will completely remove the task from the list
+  */
   handleSaveEdit(taskId,newDesc) {
     if (newDesc === "") {
       this.handleDel(taskId);
@@ -116,6 +136,13 @@ class App extends Component {
     }
   }
 
+  // handleReset() will clear all the tasks from the list!
+  handleReset() {
+    if (window.confirm("This will clear all the tasks.\nAre you sure to proceed?")) {
+      this.setState({tasks: []});
+    }
+  }
+
   render() {
     const doneTasks = this.state.tasks.filter(task => {
       return task.done === true;
@@ -129,7 +156,10 @@ class App extends Component {
     if (this.state.addNewTask) {
       addSection = <TaskAdder newTask={this.state.newTask} handleSave={this.handleSave} handleCancel={this.handleCancel}/>
     } else {
-      addSection = <button className="App-new-task-button" onClick={this.handleNewTask}>New Task</button>
+      addSection = <div>
+                    <button className="App-new-task-button" onClick={this.handleNewTask}>New Task</button>
+                    <button className="App-reset-button" onClick={this.handleReset}>Reset List</button>
+                   </div>
     }
 
     return (
