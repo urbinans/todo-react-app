@@ -43,6 +43,7 @@ class App extends Component {
     this.handleSave = this.handleSave.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.handleDel = this.handleDel.bind(this);
+    this.handleTaskStatusChange = this.handleTaskStatusChange.bind(this);
   }
 
   handleNewTask() {
@@ -86,6 +87,18 @@ class App extends Component {
     });
   }
 
+  handleTaskStatusChange(taskId) {
+    const tasks = this.state.tasks.map(task => {
+      if (task.id === taskId) {
+        task.done = !task.done;
+      }
+      return task;
+    });
+    this.setState({
+      tasks: tasks
+    });
+  }
+
   render() {
     const doneTasks = this.state.tasks.filter(task => {
       return task.done === true;
@@ -108,8 +121,18 @@ class App extends Component {
           <h1 className="App-title">My Todo List</h1>
         </header>
         <div className="App-listers">
-          <TaskLister title="Undone" tasks={undoneTasks} handleDel={this.handleDel}/>
-          <TaskLister title="Done" tasks={doneTasks} handleDel={this.handleDel}/>
+          <TaskLister 
+            title="Undone"
+            tasks={undoneTasks}
+            handleDel={this.handleDel}
+            handleTaskStatusChange={this.handleTaskStatusChange}
+          />
+          <TaskLister
+            title="Done"
+            tasks={doneTasks}
+            handleDel={this.handleDel}
+            handleTaskStatusChange={this.handleTaskStatusChange}
+          />
         </div>
         {addSection}
       </div>

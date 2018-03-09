@@ -6,10 +6,15 @@ class TaskLister extends Component {
   constructor(props) {
     super(props);
     this.handleDel = this.handleDel.bind(this);
+    this.handleTaskStatusChange = this.handleTaskStatusChange.bind(this);
   }
 
-  handleDel(taskId){
+  handleDel(taskId) {
     this.props.handleDel(taskId);
+  }
+
+  handleTaskStatusChange(taskId) {
+    this.props.handleTaskStatusChange(taskId);
   }
 
   render() {
@@ -21,6 +26,7 @@ class TaskLister extends Component {
           checked={task.done}
           description={task.description}
           handleDel={this.handleDel}
+          handleTaskStatusChange={this.handleTaskStatusChange}
         />
       );
     });
