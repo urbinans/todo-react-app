@@ -4,7 +4,6 @@
 
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
 import './App.css';
 import TaskLister from './TaskLister';
 import TaskAdder from './TaskAdder';
@@ -154,16 +153,6 @@ class App extends Component {
       return task.done === false;
     });
 
-    let addSection = null;
-    if (this.state.addNewTask) {
-      addSection = <TaskAdder newTask={this.state.newTask} handleSave={this.handleSave} handleCancel={this.handleCancel}/>
-    } else {
-      addSection = <div>
-                    <RaisedButton primary={true} label="New Task" onClick={this.handleNewTask} />
-                    <RaisedButton secondary={true} label="Reset List" onClick={this.handleReset} />
-                   </div>
-    }
-
     return (
       <MuiThemeProvider>
         <div className="App">
@@ -186,7 +175,14 @@ class App extends Component {
               handleSaveEdit={this.handleSaveEdit}
             />
           </div>
-          {addSection}
+          <TaskAdder
+            newTask={this.state.newTask}
+            handleSave={this.handleSave}
+            handleCancel={this.handleCancel}
+            handleNewTask={this.handleNewTask}
+            handleReset={this.handleReset}
+            addNewTask={this.state.addNewTask}
+          />
         </div>
       </MuiThemeProvider>
     );
