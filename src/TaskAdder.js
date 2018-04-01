@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 import './TaskAdder.css'
 
 class TaskAdder extends Component {
@@ -24,11 +26,17 @@ class TaskAdder extends Component {
   render() {
     return (
       <div className="Task-adder">
-        Please, add a new task:
-        <textarea cols="30" rows="2" placeholder="New Task" defaultValue={this.state.newTask} onChange={this.handleChange}></textarea>
+        <TextField
+          hintText="New Task"
+          floatingLabelText="Please, add a new task:"
+          multiLine={true}
+          defaultValue={this.state.newTask}
+          onChange={this.handleChange}
+          floatingLabelStyle={{display: 'block'}}
+        />
         <div className="Adder-buttons">
-          <button className="Save-button" onClick={this.handleSave}>Save Task</button>
-          <button className="Cancel-button" onClick={this.props.handleCancel}>Cancel</button>
+          <RaisedButton label="Save Task" primary={true} onClick={this.handleSave} />
+          <RaisedButton label="Cancel" secondary={true} onClick={this.props.handleCancel} />
         </div>
       </div>
     );

@@ -3,6 +3,8 @@
 */
 
 import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
 import './App.css';
 import TaskLister from './TaskLister';
 import TaskAdder from './TaskAdder';
@@ -157,34 +159,36 @@ class App extends Component {
       addSection = <TaskAdder newTask={this.state.newTask} handleSave={this.handleSave} handleCancel={this.handleCancel}/>
     } else {
       addSection = <div>
-                    <button className="App-new-task-button" onClick={this.handleNewTask}>New Task</button>
-                    <button className="App-reset-button" onClick={this.handleReset}>Reset List</button>
+                    <RaisedButton primary={true} label="New Task" onClick={this.handleNewTask} />
+                    <RaisedButton secondary={true} label="Reset List" onClick={this.handleReset} />
                    </div>
     }
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">My Todo List</h1>
-        </header>
-        <div className="App-listers">
-          <TaskLister 
-            title="Undone"
-            tasks={undoneTasks}
-            handleDel={this.handleDel}
-            handleTaskStatusChange={this.handleTaskStatusChange}
-            handleSaveEdit={this.handleSaveEdit}
-          />
-          <TaskLister
-            title="Done"
-            tasks={doneTasks}
-            handleDel={this.handleDel}
-            handleTaskStatusChange={this.handleTaskStatusChange}
-            handleSaveEdit={this.handleSaveEdit}
-          />
+      <MuiThemeProvider>
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">My Todo List</h1>
+          </header>
+          <div className="App-listers">
+            <TaskLister 
+              title="Undone"
+              tasks={undoneTasks}
+              handleDel={this.handleDel}
+              handleTaskStatusChange={this.handleTaskStatusChange}
+              handleSaveEdit={this.handleSaveEdit}
+            />
+            <TaskLister
+              title="Done"
+              tasks={doneTasks}
+              handleDel={this.handleDel}
+              handleTaskStatusChange={this.handleTaskStatusChange}
+              handleSaveEdit={this.handleSaveEdit}
+            />
+          </div>
+          {addSection}
         </div>
-        {addSection}
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
