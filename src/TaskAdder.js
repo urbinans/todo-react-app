@@ -44,7 +44,7 @@ class TaskAdder extends Component {
                     multiLine={true}
                     defaultValue={this.state.newTask}
                     onChange={this.handleChange}
-                    floatingLabelStyle={{display: 'block'}}
+//                    floatingLabelStyle={{display: 'block'}}
                   />
                   <div className="Adder-buttons">
                     <RaisedButton label="Save Task" primary={true} onClick={this.handleSave} />
@@ -54,7 +54,6 @@ class TaskAdder extends Component {
     } else {
       element = <div>
                   <RaisedButton primary={true} label="New Task" onClick={this.props.handleNewTask} />
-                  <RaisedButton secondary={true} label="Reset List" onClick={this.props.handleReset} />
                 </div>
     }
 

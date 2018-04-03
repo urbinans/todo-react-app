@@ -1,6 +1,5 @@
 .Lister {
-    border: 5px solid black;
-    border-radius: 10px;
+    border-radius: 10px !important;
     margin: 10px;
     width: 300px;
 }

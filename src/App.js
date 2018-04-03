@@ -4,6 +4,10 @@
 
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
+import MenuItem from 'material-ui/MenuItem';
 import './App.css';
 import TaskLister from './TaskLister';
 import TaskAdder from './TaskAdder';
@@ -45,7 +49,8 @@ class App extends Component {
     this.state = {
       addNewTask: false,
       tasks: tasks,
-      idCount: 5
+      idCount: 5,
+      drawerIsOpen: false
     };
     this.handleNewTask = this.handleNewTask.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -54,6 +59,7 @@ class App extends Component {
     this.handleTaskStatusChange = this.handleTaskStatusChange.bind(this);
     this.handleSaveEdit = this.handleSaveEdit.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.handleOpenDrawer = this.handleOpenDrawer.bind(this);
   }
 
   //  handleNewTask() will change the state of the app to render the section to add a new task
@@ -144,6 +150,10 @@ class App extends Component {
     }
   }
 
+  handleOpenDrawer() {
+    this.setState({drawerIsOpen: !this.state.drawerIsOpen});
+  }
+
   render() {
     const doneTasks = this.state.tasks.filter(task => {
       return task.done === true;
@@ -156,9 +166,13 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="App">
-          <header className="App-header">
-            <h1 className="App-title">My Todo List</h1>
-          </header>
+          <AppBar title="My Todo List" onLeftIconButtonClick={this.handleOpenDrawer} />
+          <Drawer open={this.state.drawerIsOpen} docked={false}>
+            <MenuItem disabled={true}>Main Menu</MenuItem>
+            <Divider />
+            <MenuItem primaryText="Reset List" onClick={this.handleReset} />
+            <MenuItem primaryText="Close" onClick={this.handleOpenDrawer} />
+          </Drawer>
           <div className="App-listers">
             <TaskLister 
               title="Undone"
@@ -180,7 +194,6 @@ class App extends Component {
             handleSave={this.handleSave}
             handleCancel={this.handleCancel}
             handleNewTask={this.handleNewTask}
-            handleReset={this.handleReset}
             addNewTask={this.state.addNewTask}
           />
         </div>
