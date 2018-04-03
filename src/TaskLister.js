@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
 import './TaskLister.css';
 import TaskItem from './TaskItem';
 
@@ -41,6 +42,7 @@ class TaskLister extends Component {
     return (
       <Paper className="Lister">
         <span className="Lister-title">{this.props.title}</span><br />
+        <Divider />
         {items}
       </Paper>
     );

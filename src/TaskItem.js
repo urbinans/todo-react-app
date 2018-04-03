@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import IconButton from 'material-ui/IconButton';
 import Delete from 'material-ui/svg-icons/action/delete';
 import Edit from 'material-ui/svg-icons/image/edit';
 import Save from 'material-ui/svg-icons/content/save';
+import Cancel from 'material-ui/svg-icons/content/clear';
 import './TaskItem.css';
 
 class TaskItem extends Component {
@@ -14,6 +16,7 @@ class TaskItem extends Component {
     this.handleTaskStatusChange = this.handleTaskStatusChange.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.handleSaveEdit = this.handleSaveEdit.bind(this);
+    this.handleCancelEdit = this.handleCancelEdit.bind(this);
   }
 
   handleDel() {
@@ -36,19 +39,52 @@ class TaskItem extends Component {
     this.props.handleSaveEdit(this.props.taskId, newDesc);
   }
 
+  handleCancelEdit() {
+    if (window.confirm("Are you sure you want to discard these changes?")) {
+      this.toggleEdit();
+    }
+  }
+
   render() {
     let actions = null;
+    const styles = {
+      smallIcon: {
+        width: 20,
+        height: 20
+      },
+      small: {
+        width: 20,
+        height: 20,
+        padding: 0,
+        borderWidth: '0px'
+      }
+    };
+
     if (this.state.edit) {
       //actions = <i className="fas fa-save" onClick={this.handleSaveEdit}></i>
-      actions = <Save onClick={this.handleSaveEdit} />
+      actions = (
+        <div className="Task-actions">
+          <IconButton iconStyle={styles.smallIcon} style={styles.small}  onClick={this.handleSaveEdit} >
+            <Save />
+          </IconButton>
+          <IconButton iconStyle={styles.smallIcon} style={styles.small}  onClick={this.handleCancelEdit} >
+            <Cancel color="#c82333" />
+          </IconButton>
+        </div>
+      );
                 
     } else {
       actions = (
         <div className="Task-actions">
           <i className="fas fa-pencil-alt Task-edit" onClick={this.toggleEdit}></i>
           <i className="fas fa-trash-alt Task-delete" onClick={this.handleDel}></i>
-          <Edit className="Task-edit" color="#e0a800" onClick={this.toggleEdit} />
-          <Delete className="Task-delete" color="#c82333" onClick={this.handleDel} />
+          <IconButton className="Task-edit" iconStyle={styles.smallIcon} style={styles.small} onClick={this.toggleEdit} >
+            <Edit color="#e0a800" />
+          </IconButton>
+          <IconButton className="Task-delete" iconStyle={styles.smallIcon} style={styles.small}onClick={this.handleDel} >
+            <Delete color="#c82333" />
+          </IconButton>
+          <input type="checkbox" defaultChecked={this.props.checked} onChange={this.handleTaskStatusChange} />
         </div>
       );
     }
@@ -63,7 +99,6 @@ class TaskItem extends Component {
     return (
       <div className="Task">
         {actions}
-        <input type="checkbox" defaultChecked={this.props.checked} onChange={this.handleTaskStatusChange} />
         {taskDesc}
       </div>
     );
