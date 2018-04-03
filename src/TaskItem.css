@@ -6,7 +6,7 @@
 
 .Task-actions {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     font-size: 75%;
 }
 

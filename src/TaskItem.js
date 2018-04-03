@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Delete from 'material-ui/svg-icons/action/delete';
+import Edit from 'material-ui/svg-icons/image/edit';
+import Save from 'material-ui/svg-icons/content/save';
 import './TaskItem.css';
 
 class TaskItem extends Component {
@@ -30,18 +33,22 @@ class TaskItem extends Component {
   handleSaveEdit() {
     this.toggleEdit();
     const newDesc = document.getElementById("taskEdit").value;
-    this.props.handleSaveEdit(this.props.taskId,newDesc);
+    this.props.handleSaveEdit(this.props.taskId, newDesc);
   }
 
   render() {
     let actions = null;
     if (this.state.edit) {
-      actions = <i className="fas fa-save" onClick={this.handleSaveEdit}></i>
+      //actions = <i className="fas fa-save" onClick={this.handleSaveEdit}></i>
+      actions = <Save onClick={this.handleSaveEdit} />
+                
     } else {
       actions = (
         <div className="Task-actions">
           <i className="fas fa-pencil-alt Task-edit" onClick={this.toggleEdit}></i>
           <i className="fas fa-trash-alt Task-delete" onClick={this.handleDel}></i>
+          <Edit className="Task-edit" color="#e0a800" onClick={this.toggleEdit} />
+          <Delete className="Task-delete" color="#c82333" onClick={this.handleDel} />
         </div>
       );
     }
@@ -55,8 +62,8 @@ class TaskItem extends Component {
 
     return (
       <div className="Task">
-        <input type="checkbox" defaultChecked={this.props.checked} onChange={this.handleTaskStatusChange} />
         {actions}
+        <input type="checkbox" defaultChecked={this.props.checked} onChange={this.handleTaskStatusChange} />
         {taskDesc}
       </div>
     );
