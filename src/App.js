@@ -151,7 +151,9 @@ class App extends Component {
   }
 
   handleOpenDrawer() {
-    this.setState({drawerIsOpen: !this.state.drawerIsOpen});
+    this.setState(prevState => {
+      return {drawerIsOpen: !prevState.drawerIsOpen}
+    });
   }
 
   render() {
@@ -167,7 +169,7 @@ class App extends Component {
       <MuiThemeProvider>
         <div className="App">
           <AppBar title="My Todo List" onLeftIconButtonClick={this.handleOpenDrawer} />
-          <Drawer open={this.state.drawerIsOpen} docked={false}>
+          <Drawer open={this.state.drawerIsOpen} docked={false} >
             <MenuItem disabled={true}>Main Menu</MenuItem>
             <Divider />
             <MenuItem primaryText="Reset List" onClick={this.handleReset} />
